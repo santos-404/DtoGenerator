@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Reference as both an analyzer (runs during compilation) and a normal assembly
+         so GeneratorTestHelper can directly instantiate DtoSourceGenerator. -->
+    <ProjectReference Include="..\..\src\DtoGenerator\DtoGenerator.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="true" />
+    <!-- Reference attributes so test code can use them -->
+    <ProjectReference Include="..\..\src\DtoGenerator.Attributes\DtoGenerator.Attributes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>
