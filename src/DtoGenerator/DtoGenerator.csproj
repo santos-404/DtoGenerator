@@ -7,11 +7,41 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynComponent>true</IsRoslynComponent>
+
+    <PackageId>DtoGenerator</PackageId>
+    <Authors>Javier Santos</Authors>
+    <Description>Source generator that produces DTOs and mapping extensions from annotated classes.</Description>
+
+    <!-- Keep the generator DLL out of lib/ — it is not a runtime dependency -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Reference the attributes project so its DLL lands in $(OutputPath).
+      PrivateAssets="all" prevents NuGet from listing it as a package dependency
+      (we bundle it directly instead of shipping a separate package).
+    -->
+    <ProjectReference Include="..\DtoGenerator.Attributes\DtoGenerator.Attributes.csproj"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Generator DLL → analyzers/ (Roslyn loads this at design/build time) -->
+    <None Include="$(OutputPath)\$(AssemblyName).dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/cs"
+          Visible="false" />
+    <!-- Attributes DLL → lib/ (consumers reference this normally at runtime) -->
+    <None Include="$(OutputPath)\DtoGenerator.Attributes.dll"
+          Pack="true"
+          PackagePath="lib/netstandard2.0"
+          Visible="false" />
   </ItemGroup>
 
 </Project>
