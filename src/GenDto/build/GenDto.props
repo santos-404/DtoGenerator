@@ -1,4 +1,7 @@
 <Project>
+  <PropertyGroup>
+    <EmitCompilerGeneratedFiles Condition="'$(EmitCompilerGeneratedFiles)' == ''">true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="$(MSBuildThisFileDirectory)../analyzers/dotnet/cs/GenDto.dll"
               Condition="Exists('$(MSBuildThisFileDirectory)../analyzers/dotnet/cs/GenDto.dll')" />
