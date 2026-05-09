@@ -21,5 +21,5 @@ public sealed class GenerateDtoAttribute : Attribute
     /// </summary>
     public string? Namespace { get; set; }
 
-    public GenerateDtoAttribute(string name) => Name = name;
+    public GenerateDtoAttribute(string name = "") => Name = name;
 }

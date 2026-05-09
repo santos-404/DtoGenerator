@@ -3,6 +3,35 @@ namespace GenDto.Tests;
 public class DtoSourceGeneratorTests
 {
     // -------------------------------------------------------------------------
+    // Default DTO name
+    // -------------------------------------------------------------------------
+
+    [Fact]
+    public void NoName_DefaultsToClassNameDto()
+    {
+        var result = GeneratorTestHelper.Run("""
+            using GenDto.Attributes;
+
+            namespace MyApp.Domain;
+
+            [GenerateDto]
+            public class Order
+            {
+                public int Id { get; set; }
+            }
+            """);
+
+        Assert.False(result.HasErrors);
+
+        var dto = result.GetSource("OrderDto.g.cs");
+        Assert.Contains("public partial class OrderDto", dto);
+        Assert.Contains("public int Id", dto);
+
+        var mapper = result.GetSource("OrderMapper.g.cs");
+        Assert.Contains("ToOrderDto(this MyApp.Domain.Order source)", mapper);
+    }
+
+    // -------------------------------------------------------------------------
     // Nullable correctness
     // -------------------------------------------------------------------------
 

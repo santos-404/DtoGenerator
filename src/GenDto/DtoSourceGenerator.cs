@@ -92,9 +92,10 @@ public sealed class DtoSourceGenerator : IIncrementalGenerator
         {
             ct.ThrowIfCancellationRequested();
 
-            if (attr.ConstructorArguments.Length == 0) continue;
-            var dtoName = attr.ConstructorArguments[0].Value as string;
-            if (string.IsNullOrWhiteSpace(dtoName)) continue;
+            var rawName = attr.ConstructorArguments.Length > 0
+                ? attr.ConstructorArguments[0].Value as string
+                : null;
+            string dtoName = string.IsNullOrWhiteSpace(rawName) ? $"{className}Dto" : rawName!;
 
             var mode            = DtoMode.OptOut;
             string? customNs    = null;
@@ -111,9 +112,9 @@ public sealed class DtoSourceGenerator : IIncrementalGenerator
                 ? (string.IsNullOrEmpty(namespaceName) ? "DTOs" : $"{namespaceName}.DTOs")
                 : customNs!;
 
-            var properties = BuildProperties(sourceProperties, dtoName!, mode, ct);
+            var properties = BuildProperties(sourceProperties, dtoName, mode, ct);
 
-            dtos.Add(new DtoData(dtoName!, dtoNamespace, mode, hasCustomMapping, properties));
+            dtos.Add(new DtoData(dtoName, dtoNamespace, mode, hasCustomMapping, properties));
         }
 
         return new ClassData(className, namespaceName, isPartial, dtos.ToImmutableArray());
