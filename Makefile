@@ -1,6 +1,7 @@
 .PHONY: build test pack release
 
 BUMP ?= patch
+VERSION ?=
 
 build:
 	dotnet build
@@ -9,7 +10,18 @@ test:
 	dotnet test
 
 pack:
+ifeq ($(VERSION),latest-stable)
+	@tag=$$(git describe --tags --abbrev=0); \
+	 git checkout $$tag && \
+	 VERSION= dotnet pack src/GenDto/GenDto.csproj -c Release -o ./artifacts; \
+	 git checkout -
+else ifneq ($(VERSION),)
+	@git checkout v$(VERSION) && \
+	 VERSION= dotnet pack src/GenDto/GenDto.csproj -c Release -o ./artifacts; \
+	 git checkout -
+else
 	dotnet pack src/GenDto/GenDto.csproj -c Release -o ./artifacts
+endif
 
 release:
 	@git diff-index --quiet HEAD -- || (echo "error: commit your changes before releasing" && exit 1)
