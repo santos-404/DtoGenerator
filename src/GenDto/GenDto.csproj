@@ -42,6 +42,8 @@
           Pack="true"
           PackagePath="lib/netstandard2.0"
           Visible="false" />
+    <!-- build/GenDto.props → wires up the analyzer DLL into @(Analyzer) in consumer projects -->
+    <None Include="build\GenDto.props" Pack="true" PackagePath="build" />
   </ItemGroup>
 
 </Project>
