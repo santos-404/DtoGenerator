@@ -1,4 +1,4 @@
-namespace DtoGenerator.Attributes;
+namespace GenDto.Attributes;
 
 /// <summary>
 /// Renames the C# property in the generated DTO. The new name must be a valid

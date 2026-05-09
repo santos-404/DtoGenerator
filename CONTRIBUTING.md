@@ -7,8 +7,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/santos-404/DtoGenerator
-cd DtoGenerator
+git clone https://github.com/santos-404/GenDto
+cd GenDto
 dotnet restore
 dotnet build
 dotnet test
@@ -20,11 +20,28 @@ Tests run the generator in-process against synthetic source snippets, so there a
 
 Two source projects, one test project:
 
-- `src/DtoGenerator.Attributes` — the attributes consumers put on their classes. Never published on its own.
-- `src/DtoGenerator` — the generator itself. This is the NuGet package.
-- `tests/DtoGenerator.Tests` — xUnit tests.
+- `src/GenDto.Attributes` — the attributes consumers put on their classes. Never published on its own.
+- `src/GenDto` — the generator itself. This is the NuGet package.
+- `tests/GenDto.Tests` — xUnit tests.
 
-If you add a new attribute: add the class to `DtoGenerator.Attributes`, wire up the generator logic in `DtoGenerator/DtoSourceGenerator.cs`, add tests.
+If you add a new attribute: add the class to `GenDto.Attributes`, wire up the generator logic in `GenDto/DtoSourceGenerator.cs`, add tests.
+
+## Submitting a change
+
+For anything beyond a trivial fix, open an issue first so we can agree on the approach before you write code.
+
+1. Fork the repo and create a branch from `main`
+2. Make your changes and add tests if relevant
+3. Run `dotnet test` and make sure everything passes
+4. Open a pull request against `main` with a clear description of what changed and why
+
+Keep pull requests focused — one thing per PR. If you're fixing a bug, don't also refactor surrounding code.
+
+## Code conventions
+
+- No comments unless the WHY is non-obvious (the what is clear from the code)
+- No error handling for things that can't happen — trust internal invariants
+- No abstractions beyond what the current task needs
 
 ## Versioning
 

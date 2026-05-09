@@ -18,11 +18,11 @@
   <ItemGroup>
     <!-- Reference as both an analyzer (runs during compilation) and a normal assembly
          so GeneratorTestHelper can directly instantiate DtoSourceGenerator. -->
-    <ProjectReference Include="..\..\src\DtoGenerator\DtoGenerator.csproj"
+    <ProjectReference Include="..\..\src\GenDto\GenDto.csproj"
                       OutputItemType="Analyzer"
                       ReferenceOutputAssembly="true" />
     <!-- Reference attributes so test code can use them -->
-    <ProjectReference Include="..\..\src\DtoGenerator.Attributes\DtoGenerator.Attributes.csproj" />
+    <ProjectReference Include="..\..\src\GenDto.Attributes\GenDto.Attributes.csproj" />
   </ItemGroup>
 
   <ItemGroup>

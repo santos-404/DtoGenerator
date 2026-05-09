@@ -1,4 +1,4 @@
-namespace DtoGenerator.Attributes;
+namespace GenDto.Attributes;
 
 public enum DtoMode
 {

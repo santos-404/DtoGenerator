@@ -5,19 +5,19 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace DtoGenerator;
+namespace GenDto;
 
 [Generator]
 public sealed class DtoSourceGenerator : IIncrementalGenerator
 {
-    // Fully-qualified attribute names – must match DtoGenerator.Attributes exactly.
-    private const string GenerateDtoFqn        = "DtoGenerator.Attributes.GenerateDtoAttribute";
-    private const string DtoWithMappingFqn     = "DtoGenerator.Attributes.DtoWithMappingAttribute";
-    private const string DtoIgnoreFqn          = "DtoGenerator.Attributes.DtoIgnoreAttribute";
-    private const string DtoIncludeFqn         = "DtoGenerator.Attributes.DtoIncludeAttribute";
-    private const string DtoNameFqn            = "DtoGenerator.Attributes.DtoNameAttribute";
-    private const string DtoJsonNameFqn        = "DtoGenerator.Attributes.DtoJsonNameAttribute";
-    private const string DtoFlattenFqn         = "DtoGenerator.Attributes.DtoFlattenAttribute";
+    // Fully-qualified attribute names – must match GenDto.Attributes exactly.
+    private const string GenerateDtoFqn        = "GenDto.Attributes.GenerateDtoAttribute";
+    private const string DtoWithMappingFqn     = "GenDto.Attributes.DtoWithMappingAttribute";
+    private const string DtoIgnoreFqn          = "GenDto.Attributes.DtoIgnoreAttribute";
+    private const string DtoIncludeFqn         = "GenDto.Attributes.DtoIncludeAttribute";
+    private const string DtoNameFqn            = "GenDto.Attributes.DtoNameAttribute";
+    private const string DtoJsonNameFqn        = "GenDto.Attributes.DtoJsonNameAttribute";
+    private const string DtoFlattenFqn         = "GenDto.Attributes.DtoFlattenAttribute";
 
     private static readonly SymbolDisplayFormat TypeFormat = new(
         globalNamespaceStyle:    SymbolDisplayGlobalNamespaceStyle.Omitted,

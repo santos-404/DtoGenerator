@@ -1,4 +1,4 @@
-namespace DtoGenerator.Attributes;
+namespace GenDto.Attributes;
 
 /// <summary>
 /// Signals that the generated mapper class should be <c>partial</c> and expose

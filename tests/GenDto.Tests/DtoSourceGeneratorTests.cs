@@ -1,4 +1,4 @@
-namespace DtoGenerator.Tests;
+namespace GenDto.Tests;
 
 public class DtoSourceGeneratorTests
 {
@@ -10,7 +10,7 @@ public class DtoSourceGeneratorTests
     public void OptOut_IncludesAllProperties()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -35,7 +35,7 @@ public class DtoSourceGeneratorTests
     public void OptOut_DtoIgnore_Global_ExcludesFromAllDtos()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -65,7 +65,7 @@ public class DtoSourceGeneratorTests
     public void OptOut_DtoIgnore_Scoped_ExcludesFromOneDto()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -97,7 +97,7 @@ public class DtoSourceGeneratorTests
     public void OptIn_ExcludesAllByDefault()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -120,7 +120,7 @@ public class DtoSourceGeneratorTests
     public void OptIn_DtoInclude_Scoped_AddsOnlyThatProperty()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -148,7 +148,7 @@ public class DtoSourceGeneratorTests
     public void OptIn_DtoIgnore_OverridesDtoInclude()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -175,7 +175,7 @@ public class DtoSourceGeneratorTests
     public void DtoName_Scoped_RenamesCSharpProperty()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -199,7 +199,7 @@ public class DtoSourceGeneratorTests
     public void DtoName_Global_RenamesInAllDtos()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -226,7 +226,7 @@ public class DtoSourceGeneratorTests
     public void DtoJsonName_EmitsJsonPropertyNameAttribute()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -250,7 +250,7 @@ public class DtoSourceGeneratorTests
     public void DtoName_And_DtoJsonName_Combined()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -280,7 +280,7 @@ public class DtoSourceGeneratorTests
     public void DtoFlatten_FlattensNestedProperties()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -316,7 +316,7 @@ public class DtoSourceGeneratorTests
     public void DtoWithMapping_GeneratesPartialMapperWithHook()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -344,7 +344,7 @@ public class DtoSourceGeneratorTests
     public void DefaultNamespace_IsSourceNamespacePlusDTOs()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -365,7 +365,7 @@ public class DtoSourceGeneratorTests
     public void CustomNamespace_OverridesDefault()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -391,7 +391,7 @@ public class DtoSourceGeneratorTests
     public void Mapper_GeneratesExtensionMethodForEachDto()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 
@@ -414,7 +414,7 @@ public class DtoSourceGeneratorTests
     public void Mapper_FlattenedProperties_MappedFromNestedSource()
     {
         var result = GeneratorTestHelper.Run("""
-            using DtoGenerator.Attributes;
+            using GenDto.Attributes;
 
             namespace MyApp.Domain;
 

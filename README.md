@@ -1,4 +1,4 @@
-# DtoGenerator
+# GenDto
 
 Annotate your models, get DTOs at build time.
 
@@ -19,7 +19,7 @@ The generator produces `ProductDto` and a `ToProductDto()` extension method duri
 ## Install
 
 ```
-dotnet add package DtoGenerator
+dotnet add package GenDto
 ```
 
 > Still working toward v1.0.0. Things work but the API may shift.

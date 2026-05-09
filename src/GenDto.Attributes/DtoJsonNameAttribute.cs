@@ -1,4 +1,4 @@
-namespace DtoGenerator.Attributes;
+namespace GenDto.Attributes;
 
 /// <summary>
 /// Emits a <c>[JsonPropertyName("...")]</c> attribute on the generated DTO property,

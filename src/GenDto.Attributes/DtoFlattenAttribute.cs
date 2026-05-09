@@ -1,4 +1,4 @@
-namespace DtoGenerator.Attributes;
+namespace GenDto.Attributes;
 
 /// <summary>
 /// Flattens a nested object's properties into the generated DTO instead of

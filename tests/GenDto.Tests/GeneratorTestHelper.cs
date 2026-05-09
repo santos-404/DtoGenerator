@@ -3,7 +3,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace DtoGenerator.Tests;
+namespace GenDto.Tests;
 
 /// <summary>
 /// Compiles a source string with the DtoSourceGenerator and returns the
@@ -47,7 +47,7 @@ internal static class GeneratorTestHelper
 
         // Make sure the Attributes assembly is included
         refs.Add(MetadataReference.CreateFromFile(
-            typeof(DtoGenerator.Attributes.GenerateDtoAttribute).Assembly.Location));
+            typeof(GenDto.Attributes.GenerateDtoAttribute).Assembly.Location));
 
         // System.Text.Json may not be loaded into the AppDomain yet — add it explicitly
         // so generated code that uses [JsonPropertyName] compiles correctly.

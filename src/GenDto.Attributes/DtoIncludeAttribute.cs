@@ -1,4 +1,4 @@
-namespace DtoGenerator.Attributes;
+namespace GenDto.Attributes;
 
 /// <summary>
 /// Includes a property in one or all generated DTOs.

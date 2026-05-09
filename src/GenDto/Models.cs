@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace DtoGenerator;
+namespace GenDto;
 
 /// <summary>A single property as it will appear in the generated DTO.</summary>
 internal record PropertyData(

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GenDto.Attributes/GenDto.Attributes.csproj" />
+    <Project Path="src/GenDto/GenDto.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GenDto.Tests/GenDto.Tests.csproj" />
+  </Folder>
+</Solution>
