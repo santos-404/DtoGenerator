@@ -5,7 +5,8 @@ BUMP ?= patch
 release:
 	@git diff-index --quiet HEAD -- || (echo "error: commit your changes before releasing" && exit 1)
 	@[ "$$(git rev-parse --abbrev-ref HEAD)" = "main" ] || (echo "error: releases must be made from main" && exit 1)
-	@current=$$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "0.0.0"); \
+	@tag=$$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0"); \
+	 current=$$(echo "$$tag" | sed 's/^v//'); \
 	 major=$$(echo "$$current" | cut -d. -f1); \
 	 minor=$$(echo "$$current" | cut -d. -f2); \
 	 patch=$$(echo "$$current" | cut -d. -f3); \
