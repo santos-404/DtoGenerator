@@ -7,6 +7,7 @@ internal record PropertyData(
     string SourceName,        // original property name on the source class
     string GeneratedName,     // C# name in the DTO (may differ via [DtoName])
     string TypeName,          // fully-qualified type string for the DTO property
+    bool IsNonNullableReferenceType, // true → emit = default!; (generated file always has #nullable enable)
     string? JsonName,         // if set, emit [JsonPropertyName("...")]
     bool Flatten,             // [DtoFlatten] was applied
     ImmutableArray<PropertyData> FlattenedProperties  // inner properties when Flatten=true

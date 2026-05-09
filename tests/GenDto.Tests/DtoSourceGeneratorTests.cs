@@ -3,6 +3,37 @@ namespace GenDto.Tests;
 public class DtoSourceGeneratorTests
 {
     // -------------------------------------------------------------------------
+    // Nullable correctness
+    // -------------------------------------------------------------------------
+
+    [Fact]
+    public void NonNullableReferenceProperty_GetsDefaultInitializer()
+    {
+        var result = GeneratorTestHelper.Run("""
+            #nullable enable
+            using GenDto.Attributes;
+
+            namespace MyApp.Domain;
+
+            [GenerateDto("UserDto", Mode = DtoMode.OptOut)]
+            public class User
+            {
+                public int Id { get; set; }
+                public string Name { get; set; } = "";
+                public string? Nickname { get; set; }
+            }
+            """);
+
+        Assert.False(result.HasErrors);
+
+        var dto = result.GetSource("UserDto.g.cs");
+        Assert.Contains("public string Name { get; set; } = default!;", dto);
+        Assert.DoesNotContain("public string? Nickname { get; set; } = default!;", dto);
+        Assert.DoesNotContain("public int Id { get; set; } = default!;", dto);
+        Assert.False(result.CompilationDiagnostics.Any(d => d.Id == "CS8618"));
+    }
+
+    // -------------------------------------------------------------------------
     // OptOut mode
     // -------------------------------------------------------------------------
 

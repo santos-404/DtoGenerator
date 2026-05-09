@@ -179,22 +179,24 @@ public sealed class DtoSourceGenerator : IIncrementalGenerator
                     .OfType<IPropertySymbol>()
                     .Where(p => !p.IsStatic && p.GetMethod != null)
                     .Select(p => new PropertyData(
-                        SourceName:          p.Name,
-                        GeneratedName:       p.Name,
-                        TypeName:            p.Type.ToDisplayString(TypeFormat),
-                        JsonName:            null,
-                        Flatten:             false,
-                        FlattenedProperties: ImmutableArray<PropertyData>.Empty))
+                        SourceName:                  p.Name,
+                        GeneratedName:               p.Name,
+                        TypeName:                    p.Type.ToDisplayString(TypeFormat),
+                        IsNonNullableReferenceType:  p.Type.IsReferenceType && p.NullableAnnotation != NullableAnnotation.Annotated,
+                        JsonName:                    null,
+                        Flatten:                     false,
+                        FlattenedProperties:         ImmutableArray<PropertyData>.Empty))
                     .ToImmutableArray();
             }
 
             result.Add(new PropertyData(
-                SourceName:          prop.Name,
-                GeneratedName:       generatedName,
-                TypeName:            prop.Type.ToDisplayString(TypeFormat),
-                JsonName:            jsonName,
-                Flatten:             flatten,
-                FlattenedProperties: flattenedProps));
+                SourceName:                  prop.Name,
+                GeneratedName:               generatedName,
+                TypeName:                    prop.Type.ToDisplayString(TypeFormat),
+                IsNonNullableReferenceType:  prop.Type.IsReferenceType && prop.NullableAnnotation != NullableAnnotation.Annotated,
+                JsonName:                    jsonName,
+                Flatten:                     flatten,
+                FlattenedProperties:         flattenedProps));
         }
 
         return result.ToImmutableArray();
@@ -298,7 +300,8 @@ public sealed class DtoSourceGenerator : IIncrementalGenerator
         if (prop.JsonName is not null)
             sb.AppendLine($"        [JsonPropertyName(\"{prop.JsonName}\")]");
 
-        sb.AppendLine($"        public {prop.TypeName} {prop.GeneratedName} {{ get; set; }}");
+        var init = prop.IsNonNullableReferenceType ? " = default!;" : "";
+        sb.AppendLine($"        public {prop.TypeName} {prop.GeneratedName} {{ get; set; }}{init}");
     }
 
     // ---- Mapper -------------------------------------------------------------
