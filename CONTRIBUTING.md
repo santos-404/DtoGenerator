@@ -22,8 +22,12 @@ Tests run the generator in-process against synthetic source snippets, so there a
 |---|---|
 | `make build` | Compile the solution |
 | `make test` | Run the full test suite |
-| `make pack` | Build a `.nupkg` into `./artifacts` for local testing |
+| `make pack` | Pack current code into `./artifacts`, version derived from git state |
+| `make pack VERSION=latest-stable` | Checkout the latest tag, pack it, return to current branch |
+| `make pack VERSION=1.2.0` | Checkout `v1.2.0`, pack it, return to current branch |
 | `make release` | Cut a release (see [Making a release](#making-a-release)) |
+
+`make pack` with no `VERSION` lets [MinVer](https://github.com/adamralph/minver) compute the version automatically: stable (`1.2.0`) when HEAD is on a tag, pre-release (`1.2.0-alpha.0.3`) otherwise.
 
 ### Testing the package locally
 
