@@ -10,11 +10,30 @@
 git clone https://github.com/santos-404/GenDto
 cd GenDto
 dotnet restore
-dotnet build
-dotnet test
+make build
+make test
 ```
 
 Tests run the generator in-process against synthetic source snippets, so there are no external services to spin up.
+
+## Development commands
+
+| Command | What it does |
+|---|---|
+| `make build` | Compile the solution |
+| `make test` | Run the full test suite |
+| `make pack` | Build a `.nupkg` into `./artifacts` for local testing |
+| `make release` | Cut a release (see [Making a release](#making-a-release)) |
+
+### Testing the package locally
+
+If you want to smoke-test the generator in a real project before opening a PR:
+
+```bash
+make pack
+# then in your test project:
+dotnet add package GenDto --source /path/to/GenDto/artifacts
+```
 
 ## Project structure
 
@@ -32,7 +51,7 @@ For anything beyond a trivial fix, open an issue first so we can agree on the ap
 
 1. Fork the repo and create a branch from `main`
 2. Make your changes and add tests if relevant
-3. Run `dotnet test` and make sure everything passes
+3. Run `make test` and make sure everything passes
 4. Open a pull request against `main` with a clear description of what changed and why
 
 Keep pull requests focused — one thing per PR. If you're fixing a bug, don't also refactor surrounding code.
