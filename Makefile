@@ -1,6 +1,15 @@
-.PHONY: release
+.PHONY: build test pack release
 
 BUMP ?= patch
+
+build:
+	dotnet build
+
+test:
+	dotnet test
+
+pack:
+	dotnet pack src/GenDto/GenDto.csproj -c Release -o ./artifacts
 
 release:
 	@git diff-index --quiet HEAD -- || (echo "error: commit your changes before releasing" && exit 1)
